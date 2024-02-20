@@ -12,10 +12,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 const PORT = process.env.PORT || 6969;
 
-const options = {
-  key: fs.readFileSync('server.key'),
-  cert: fs.readFileSync('server.crt')
-};
+// const options = {
+//   key: fs.readFileSync('server.key'),
+//   cert: fs.readFileSync('server.crt')
+// };
 
 connectDB();
 app.use(bodyparser.urlencoded({ extended: true }));
@@ -30,15 +30,22 @@ app.use("/js", express.static(path.resolve(__dirname, "Assets/js")));
 
 app.use("/", require("./Server/routes/router"));
 
-let server = https.createServer(options, app);
+let server = http.createServer(app);
 
 server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-const io = require("socket.io")(server, {
-  allowEIO3: true, //False by default
-});
+
+const options = {
+  path:"/api/socket.io",
+  cors:{
+    origin: "*",
+  } ,
+  allowEIO3 :true
+}
+
+const io = require("socket.io")(server,options);
 
 var userConnection = [];
 
