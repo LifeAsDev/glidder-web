@@ -3,7 +3,7 @@ const route = express.Router();
 const controller = require("../controllers/controller")
 const services = require("../services/render");
 
-route.get("/",services.homeRoutes);
+route.get("/",services.testRoute);
 route.get("/video-chat",services.videoRoute);
 route.get("/text-chat",services.textRoute);
 route.get("/test",services.testRoute);
