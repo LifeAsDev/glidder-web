@@ -38,10 +38,6 @@ server.listen(PORT, () => {
 
 
 const options = {
-  path:"/api/socket.io",
-  cors:{
-    origin: "*",
-  } ,
   allowEIO3 :true
 }
 
